@@ -1,53 +1,71 @@
-var colorDisplay = document.querySelector('#colorDisplay');
+// CONSTANTS
+const LEVEL_EASY = 'Easy'
+const LEVEL_HARD = 'Hard'
+const LEVEL_PRO = 'Pro'
+
+const OPERATION_ADD = 'add'
+const OPERATION_REMOVE = 'remove'
+
+const EVENT_CLICK = 'click'
+const CLASS_ACTIVE = 'active'
+
+const MESSAGE_CORRECT = "Correct!"
+const MESSAGE_FAILED = 'Try again...'
+const MESSAGE_RESTART = 'Play Again'
+
+const TEXT_RESET_BUTTON = 'New Colors'
+const TEXT_EMPTY = ''
+
+const BACKGROUND_BUTTON_ACTIVE = '#232323'
+const BACKGROUND_HEADER = "#4682b4"
+
+var rgbColorCodeDisplay = document.querySelector('#colorDisplay');
 var resultDisplay = document.querySelector('#resultDisplay');
 var heading = document.querySelector('h1');
-var resetButton = document.querySelector('#reset');
-var sq = document.querySelectorAll('.square');
+var resetButton = document.querySelector('#reset'); // New Colors button
+var squares = document.querySelectorAll('.square');
 var modeButton = document.querySelectorAll('.mode');
 
-var n = 3;
+var squareCount = 3;
 var colors = [];
 var ans = [];
-resetter();
+
+// initial setting of play area
+resetPlayArea();
 
 for (let index = 0; index < modeButton.length; index++) {
+    modeButton[index].addEventListener(EVENT_CLICK, function () {
+        modeButton.forEach(mode => mode.classList.remove(CLASS_ACTIVE))
+        this.classList.add(CLASS_ACTIVE);
+        updateClassListForElementRange(squares, 0, 9, OPERATION_ADD)
 
-    modeButton[index].addEventListener('click', function () {
-        modeButton[0].classList.remove('active');
-        modeButton[1].classList.remove('active');
-        this.classList.add('active');
         var x = this.textContent;
-        if (x === 'Easy') {
-            console.log(1);
-            n = 3;
-            for (let i = 3; i < 6; i++) {
-                sq[i].classList.add('restrictedSquare');
-            }
+
+        if (x === LEVEL_EASY) {
+            squareCount = 3;
+        } else if (x === LEVEL_HARD) {
+            squareCount = 6;
         } else {
-            console.log(2);
-            n = 6;
-            for (let i = 3; i < 6; i++) {
-                sq[i].classList.remove('restrictedSquare');
-            }
+            squareCount = 9;
         }
-        resetter();
+
+        updateClassListForElementRange(squares, 0, squareCount, OPERATION_REMOVE)
+        resetPlayArea();
     });
 }
 
-
 function successColor(n) {
     for (let i = 0; i < n; i++) {
-        sq[i].style.backgroundColor = colors[ans];
+        squares[i].style.backgroundColor = colors[ans];
     }
 }
 
-function goalColor() {
+function GenerateTargetColor() {
     var x = parseInt(Math.random() * colors.length);
     return x;
 }
 
-function colorGen(n) {
-
+function PopulateColors(n) {
     var arr = [];
     for (let index = 0; index < n; index++) {
         arr[index] = randomColor();
@@ -62,37 +80,46 @@ function randomColor() {
     var finalColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
     return finalColor;
 }
-function colorSet() {
-    for (let index = 0; index < sq.length; index++) {
+
+function setSquareColors() {
+    for (let index = 0; index < squares.length; index++) {
         //colors assign
-        sq[index].style.backgroundColor = colors[index];
+        squares[index].style.backgroundColor = colors[index];
 
         //event handler
-        sq[index].addEventListener('click', function () {
+        squares[index].addEventListener(EVENT_CLICK, function () {
             var clickedColor = this.style.backgroundColor;
             if (clickedColor === colors[ans]) {
-                resultDisplay.textContent = ' Correct!';
-                successColor(n);
+                resultDisplay.textContent = MESSAGE_CORRECT;
+                successColor(squareCount);
                 heading.style.backgroundColor = colors[ans];
-                resetButton.textContent = 'Play Again';
+                resetButton.textContent = MESSAGE_RESTART;
             }
             else {
-                this.style.backgroundColor = '#232323';
-                resultDisplay.textContent = 'Try again...'
+                this.style.backgroundColor = BACKGROUND_BUTTON_ACTIVE;
+                resultDisplay.textContent = MESSAGE_FAILED
             }
         });
     }
 }
 
-function resetter() {
-    colors = colorGen(n);
-    ans = goalColor();
+function resetPlayArea() {
+    colors = PopulateColors(squareCount);
+    ans = GenerateTargetColor();
     colorDisplay.textContent = colors[ans];
-    heading.style.backgroundColor = '#4682b4';
-    colorSet();
+    heading.style.backgroundColor = BACKGROUND_HEADER;
+    setSquareColors();
 }
-resetButton.addEventListener('click', function () {
-    resetter();
-    resetButton.textContent = 'New Colors';
-    resultDisplay.textContent = '';
+
+resetButton.addEventListener(EVENT_CLICK, function () {
+    resetPlayArea();
+    resetButton.textContent = TEXT_RESET_BUTTON;
+    resultDisplay.textContent = TEXT_EMPTY;
 });
+
+// UTIL FUNCTIONS
+function updateClassListForElementRange(array, start, end, operation) {
+    for (let i = start; i < end; i++) {
+        operation == OPERATION_ADD ? array[i].classList.add('restrictedSquare') : array[i].classList.remove('restrictedSquare');
+    }
+}
