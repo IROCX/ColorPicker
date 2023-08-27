@@ -148,12 +148,10 @@ function updateHealth(operation) {
     else if (health > 0) health -= 1
 
     for (let index = 0; index < health; index++) {
-        console.log("R", index);
         healthDisplayIndicators[index].classList.remove("noDisplay")
     }
 
     for (let index = health; index < healthDisplayIndicators.length; index++) {
-        console.log("A", index);
         healthDisplayIndicators[index].classList.add("noDisplay")
     }
 }
