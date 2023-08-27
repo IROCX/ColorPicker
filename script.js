@@ -25,13 +25,45 @@ var heading = document.querySelector('h1');
 var resetButton = document.querySelector('#reset'); // New Colors button
 var squares = document.querySelectorAll('.square');
 var modeButton = document.querySelectorAll('.mode');
+var scoreDisplay = document.querySelector('.scoreDisplay');
+var healthDisplayIndicators = document.querySelectorAll('.healthIndicator');
+var gameStatScreen = document.querySelector('.gameStatScreen');
+var gameScore = document.querySelector('.scoreCard');
 
 var squareCount = 3;
 var colors = [];
 var ans = [];
+var score = 0;
+var health = 5;
 
 // initial setting of play area
 resetPlayArea();
+updateScore("reset")
+updateHealth("reset")
+
+for (let index = 0; index < squares.length; index++) {
+    squares[index].addEventListener(EVENT_CLICK, function (e) {
+        var clickedColor = this.style.backgroundColor;
+        if (clickedColor === colors[ans]) {
+            resultDisplay.textContent = MESSAGE_CORRECT;
+            successColor(squareCount);
+            heading.style.backgroundColor = colors[ans];
+            updateScore("increase")
+            resetPlayArea()
+        }
+        else {
+            this.style.backgroundColor = BACKGROUND_BUTTON_ACTIVE;
+            resultDisplay.textContent = MESSAGE_FAILED
+            updateHealth("decrease")
+            evaluateGameState()
+        }
+    });
+}
+
+gameStatScreen.addEventListener(EVENT_CLICK, function () {
+    this.classList.add('noDisplay')
+})
+
 
 for (let index = 0; index < modeButton.length; index++) {
     modeButton[index].addEventListener(EVENT_CLICK, function () {
@@ -49,6 +81,8 @@ for (let index = 0; index < modeButton.length; index++) {
             squareCount = 9;
         }
 
+        updateHealth("reset")
+        updateScore("reset")
         updateClassListForElementRange(squares, 0, squareCount, OPERATION_REMOVE)
         resetPlayArea();
     });
@@ -85,21 +119,6 @@ function setSquareColors() {
     for (let index = 0; index < squares.length; index++) {
         //colors assign
         squares[index].style.backgroundColor = colors[index];
-
-        //event handler
-        squares[index].addEventListener(EVENT_CLICK, function () {
-            var clickedColor = this.style.backgroundColor;
-            if (clickedColor === colors[ans]) {
-                resultDisplay.textContent = MESSAGE_CORRECT;
-                successColor(squareCount);
-                heading.style.backgroundColor = colors[ans];
-                resetButton.textContent = MESSAGE_RESTART;
-            }
-            else {
-                this.style.backgroundColor = BACKGROUND_BUTTON_ACTIVE;
-                resultDisplay.textContent = MESSAGE_FAILED
-            }
-        });
     }
 }
 
@@ -117,9 +136,51 @@ resetButton.addEventListener(EVENT_CLICK, function () {
     resultDisplay.textContent = TEXT_EMPTY;
 });
 
+function updateScore(operation) {
+    if (operation === "reset") score = 0
+    else score += 1
+    scoreDisplay.textContent = score
+}
+
+function updateHealth(operation) {
+
+    if (operation === "reset") health = healthDisplayIndicators.length
+    else if (health > 0) health -= 1
+
+    for (let index = 0; index < health; index++) {
+        console.log("R", index);
+        healthDisplayIndicators[index].classList.remove("noDisplay")
+    }
+
+    for (let index = health; index < healthDisplayIndicators.length; index++) {
+        console.log("A", index);
+        healthDisplayIndicators[index].classList.add("noDisplay")
+    }
+}
+
+function evaluateGameState() {
+    if (health == 0){
+        displayGameStats()
+        resultDisplay.textContent = TEXT_EMPTY
+    }
+    else{
+        resultDisplay.textContent = MESSAGE_FAILED
+    }
+}
+
+function displayGameStats() {
+    gameStatScreen.classList.remove("noDisplay")
+    gameScore.textContent = score
+    resetPlayArea()
+    updateHealth("reset")
+    updateScore("reset")
+}
+
 // UTIL FUNCTIONS
 function updateClassListForElementRange(array, start, end, operation) {
     for (let i = start; i < end; i++) {
         operation == OPERATION_ADD ? array[i].classList.add('restrictedSquare') : array[i].classList.remove('restrictedSquare');
     }
 }
+
+

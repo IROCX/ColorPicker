@@ -111,3 +111,73 @@ button:hover {
 #reset {
     margin-right: 50px;
 }
+
+.scoreDisplay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 1rem;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.heathDisplay {
+    position: absolute;
+    background-color: transparent;
+    top: 10vh;
+    right: 5%;
+}
+@media screen and (min-width: 2500px){
+    .heathDisplay {     
+        top: 5vh;
+    }
+}
+
+.heathDisplay ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.healthIndicator {
+    background-color: red;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    list-style: none;
+}
+
+.gameStatScreen{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 90vw;
+    height: 90vh;
+    margin: auto;
+    background-color: rgba(196, 196, 196, 0.8);
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+.gameStatScreen p{
+    font-size: 1rem;
+}
+
+.noDisplay{
+    display: none;
+}
+
