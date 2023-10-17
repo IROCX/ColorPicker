@@ -42,9 +42,34 @@ h1 {
 
 #colorDisplay {
     text-transform: uppercase;
-    font-size: 35px;
     display: block;
-    font-size: 200%;
+    font-size: 4rem;
+}
+
+@media screen and (max-width: 1000px) {
+    #colorDisplay {
+        display: block;
+        font-size: 3rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #colorDisplay {
+        display: block;
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 1rem;
+    }
+
+    #resultDisplay {
+        width: 100%;
+    }
 }
 
 table {
