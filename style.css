@@ -19,9 +19,9 @@ h1 {
     font-weight: normal;
     line-height: 1.5;
     padding: 10px 0px;
-    transition: background-color 250ms;
-    -webkit-transition: background-color 400ms;
     -moz-transition: background-color 400ms;
+    -webkit-transition: background-color 400ms;
+    transition: background-color 250ms;
 }
 
 #resultDisplay {
@@ -43,12 +43,16 @@ h1 {
 table {
     margin: 20px auto;
     width: 50%;
-    /* border: 1px solid red; */
+}
+
+@media screen and (max-width: 1000px) {
+    table {
+        width: 75%;
+    }
 }
 
 td {
     padding: 10px;
-    /* border: 1px solid red; */
     width: 33.3%;
 }
 
@@ -58,9 +62,10 @@ td {
     background-color: #232323;
     padding-bottom: 30%;
     border-radius: 8px;
-    transition: background-color 400ms;
-    -webkit-transition: background-color 400ms;
     -moz-transition: background-color 400ms;
+    -webkit-transition: background-color 400ms;
+    transition: background-color 400ms;
+
 }
 
 #stripe {
@@ -91,9 +96,9 @@ button {
     font-size: inherit;
     padding: 2px;
     margin: 0 7px;
-    transition: all 250ms;
-    -webkit-transition: all 250ms;
     -moz-transition: all 250ms;
+    -webkit-transition: all 250ms;
+    transition: all 250ms;
     outline: none;
     border-radius: 2px;
     width: 75px;
@@ -131,11 +136,12 @@ button:hover {
 .heathDisplay {
     position: absolute;
     background-color: transparent;
-    top: 10vh;
-    right: 5%;
+    bottom: 5%;
+    left: 5%;
 }
-@media screen and (min-width: 2500px){
-    .heathDisplay {     
+
+@media screen and (min-width: 2500px) {
+    .heathDisplay {
         top: 5vh;
     }
 }
@@ -154,7 +160,7 @@ button:hover {
     list-style: none;
 }
 
-.gameStatScreen{
+.gameStatScreen {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -173,11 +179,10 @@ button:hover {
     font-size: 2rem;
 }
 
-.gameStatScreen p{
+.gameStatScreen p {
     font-size: 1rem;
 }
 
-.noDisplay{
+.noDisplay {
     display: none;
 }
-
