@@ -33,7 +33,6 @@ h1 {
 #resultDisplay {
     display: inline-block;
     width: 20%;
-    min-height: 14px;
     font-weight: 700;
     color: steelblue;
     letter-spacing: 1px;
@@ -67,9 +66,6 @@ h1 {
         font-size: 1rem;
     }
 
-    #resultDisplay {
-        width: 100%;
-    }
 }
 
 table {
@@ -103,6 +99,7 @@ td {
     -moz-transition: background-color 400ms;
     -webkit-transition: background-color 400ms;
     transition: background-color 400ms;
+    cursor: pointer;
 
 }
 
@@ -116,7 +113,7 @@ td {
 
 #stripe button,
 #stripe span {
-    height: 100%;
+
     padding: 0.5rem;
 }
 
@@ -128,7 +125,6 @@ td {
 
 .restrictedSquare {
     display: none;
-    /* transition: all 250ms; */
 }
 
 button {
@@ -150,12 +146,18 @@ button {
     width: 75px;
 }
 
+button:hover {
+    cursor: pointer;
+    color: white;
+    background: steelblue;
+}
+
 #reset {
     width: 150px;
     margin-right: 50px;
 }
 
-button:hover {
+#reset:active {
     color: white;
     background: steelblue;
 }
@@ -172,18 +174,28 @@ button:hover {
         align-items: center;
     }
 
-    #stripe button:hover {
+
+    #reset {
+        margin-right: 0;
+    }
+
+    #reset:hover {
         background-color: transparent;
         color: #4682b4;
     }
 
-    #stripe button:active {
+    #reset:active {
         color: white;
         background: steelblue;
     }
 
-    #reset {
-        margin-right: 0;
+    .active {
+        background: rgb(255, 255, 255) !important;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(70, 130, 180, 1) 10%, rgba(70, 130, 180, 1) 50%, rgba(70, 130, 180, 1) 90%, rgba(255, 255, 255, 1) 100%) !important;
+    }
+
+    #resultDisplay {
+        width: 100%;
     }
 }
 
