@@ -25,8 +25,6 @@ jobs:
           # Your Firebase project ID (optional if you have one default)
           project: rgb-colorpicker
           # The service account secret you created
-          repoToken: '${{ secrets.GITHUB_TOKEN }}' # Often used for PRs/Previews
           firebaseServiceAccount: '${{ secrets.FIREBASE }}' # Use the token you saved
-          channelId: live # Deploy to the 'live' channel (production)
           # The build directory defined in your firebase.json's 'hosting' section
           # public: 'build'
