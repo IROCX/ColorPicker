@@ -1,0 +1,32 @@
+name: Deploy to Firebase Hosting on Push
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - master # Trigger on pushes to the main branch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build_and_deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      # Step 5: Deploy to Firebase Hosting
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0 # Recommended action for Firebase Hosting
+        with:
+          # Your Firebase project ID (optional if you have one default)
+          project: rgb-colorpicker
+          # The service account secret you created
+          repoToken: '${{ secrets.GITHUB_TOKEN }}' # Often used for PRs/Previews
+          firebaseServiceAccount: '${{ secrets.FIREBASE }}' # Use the token you saved
+          channelId: live # Deploy to the 'live' channel (production)
+          # The build directory defined in your firebase.json's 'hosting' section
+          # public: 'build'
