@@ -25,6 +25,6 @@ jobs:
           # Your Firebase project ID (optional if you have one default)
           project: rgb-colorpicker
           # The service account secret you created
-          firebaseServiceAccount: '${{ secrets.FIREBASE }}' # Use the token you saved
+          firebaseServiceAccount: '${{ secrets.FIREBASE_DEPLOY_TOKEN }}' # Use the token you saved
           # The build directory defined in your firebase.json's 'hosting' section
           # public: 'build'
