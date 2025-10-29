@@ -22,9 +22,6 @@ jobs:
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0 # Recommended action for Firebase Hosting
         with:
-          # Your Firebase project ID (optional if you have one default)
-          project: rgb-colorpicker
-          # The service account secret you created
-          firebaseServiceAccount: '${{ secrets.FIREBASE_DEPLOY_TOKEN }}' # Use the token you saved
-          # The build directory defined in your firebase.json's 'hosting' section
-          # public: 'build'
+          args: deploy --only hosting --project rgb-colorpicker
+        env:
+          FIREBASE_TOKEN: '${{ secrets.FIREBASE_DEPLOY_TOKEN }}' # Use the token you saved
