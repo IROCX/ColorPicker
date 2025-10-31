@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="An interactive RGB color guessing game to test and improve your color recognition skills" />
     <link rel="icon" type="image/png" href="./assets/rgb.png" />
     <link rel="stylesheet" href="./style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Exo:400,700&display=swap"
-      rel="stylesheet"
-    />
-    <title>RGB Color Picker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>RGB Color Picker Game</title>
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -19,69 +18,56 @@
   </head>
 
   <body>
-    <h1>Color Picker <span id="colorDisplay">RGB</span></h1>
-    <div id="stripe">
-      <div>
-        <button id="reset">New Colors</button>
+    <div class="app-container">
+      <header>
+        <h1>Color Picker <span id="colorDisplay">RGB</span></h1>
+        <div id="stripe">
+          <div class="control-group">
+            <button id="reset" class="btn btn-primary">New Colors</button>
+          </div>
+          <span id="resultDisplay" class="result-text">ⓘ Tap on color for above RGB code</span>
+          <div class="control-group">
+            <button class="btn mode active">Easy</button>
+            <button class="btn mode">Hard</button>
+            <button class="btn mode">Pro</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="game-container">
+        <!-- semantic grid replacing table/tr/td for better responsive control -->
+        <div class="grid">
+          <div class="square" data-index="0"></div>
+          <div class="square" data-index="1"></div>
+          <div class="square" data-index="2"></div>
+          <div class="square" data-index="3"></div>
+          <div class="square" data-index="4"></div>
+          <div class="square" data-index="5"></div>
+          <div class="square" data-index="6"></div>
+          <div class="square" data-index="7"></div>
+          <div class="square" data-index="8"></div>
+        </div>
+
+        <div class="heathDisplay">
+          <p>Lives</p>
+          <ul>
+            <li class="healthIndicator"></li>
+            <li class="healthIndicator"></li>
+            <li class="healthIndicator"></li>
+            <li class="healthIndicator"></li>
+            <li class="healthIndicator"></li>
+          </ul>
+        </div>
+
+        <div class="scoreDisplay"></div>
+      </main>
+
+      <div class="gameStatScreen noDisplay">
+        <div class="modal-content">
+          <h2>Your score: <span class="scoreCard"></span></h2>
+          <p>Click anywhere to play again</p>
+        </div>
       </div>
-      <span id="resultDisplay"> ⓘ Tap on color for above RGB code</span>
-      <div>
-        <button class="active mode">Easy</button>
-        <button class="mode">Hard</button>
-        <button class="mode">Pro</button>
-      </div>
-    </div>
-    <table>
-      <tr>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-        <td>
-          <div class="square"></div>
-        </td>
-      </tr>
-    </table>
-
-    <div class="heathDisplay">
-      <ul>
-        <li class="healthIndicator"></li>
-        <li class="healthIndicator"></li>
-        <li class="healthIndicator"></li>
-        <li class="healthIndicator"></li>
-        <li class="healthIndicator"></li>
-      </ul>
-    </div>
-
-    <div class="scoreDisplay"></div>
-
-    <div class="gameStatScreen noDisplay">
-      <h2>Your score: <span class="scoreCard"></span></h2>
-      <p>Click anywhere to play again.</p>
     </div>
   </body>
   <script src="./script.js"></script>
