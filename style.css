@@ -1,271 +1,453 @@
+:root {
+    /* Muted / Premium Color Variables (refined)
+       - smaller radii for geometric look
+       - desaturated accent and neutral header */
+    --color-bg-primary: #f6f7f8;
+    /* soft warm off-white */
+    --color-bg-secondary: #ffffff;
+    /* card / square background */
+    --color-accent: #1f3a57;
+    /* deep navy - modern classic */
+    --color-accent-muted: #9aa6b0;
+    /* muted companion tone */
+    --color-text-primary: #0b1320;
+    /* deep charcoal */
+    --color-text-secondary: #657076;
+    /* cool gray */
+    --color-success: #3b8a6b;
+    /* muted green */
+    --color-error: #9b4f4f;
+    /* muted red */
+    --color-button-hover: #183047;
+    /* darker navy hover */
+    --color-header-bg: #162831;
+    /* very deep graphite/navy header */
+
+    /* Spacing Variables */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+
+    /* Animation Variables */
+    --transition-fast: 180ms;
+    --transition-normal: 300ms;
+    --transition-slow: 500ms;
+
+    /* Border Radius (geometric: small) */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 9999px;
+}
+
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background: #232323;
-    margin: 0;
-    font-family: 'Exo', sans-serif;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    height: 100vh;
+    /* lock to viewport height */
+    overflow: hidden;
+    /* prevent vertical scrolling at any size */
+}
+
+.app-container {
+    width: 100%;
+    height: 100vh;
+    /* full viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 h1 {
-    color: #ffffff;
-    background-color: #4682b4;
-    font-size: 25px;
+    color: #fff;
+    background-color: var(--color-header-bg);
+    font-size: 1.5rem;
     text-align: center;
     text-transform: uppercase;
-    margin: 0;
-    font-weight: normal;
-    line-height: 1.5;
-    padding: 10px 0px;
-    -moz-transition: background-color 400ms;
-    -webkit-transition: background-color 400ms;
-    transition: background-color 250ms;
-}
-
-#resultDisplay {
-    display: inline-block;
-    width: 20%;
-    font-weight: 700;
-    color: steelblue;
-    letter-spacing: 1px;
-    font-size: inherit;
+    padding: var(--spacing-lg) var(--spacing-md);
+    transition: background-color var(--transition-normal);
+    margin-bottom: 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    /* subtle small radius for geometry */
 }
 
 #colorDisplay {
-    text-transform: uppercase;
     display: block;
-    font-size: 4rem;
+    font-size: 2.5rem;
+    margin-top: var(--spacing-sm);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    /* removed strong glows for a cleaner, premium look */
+    text-shadow: none;
 }
 
-@media screen and (max-width: 1000px) {
-    #colorDisplay {
-        display: block;
-        font-size: 3rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
+#resultDisplay {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
 }
 
-@media screen and (max-width: 600px) {
-    #colorDisplay {
-        display: block;
-        font-size: 2rem;
-    }
-
-    h1 {
-        font-size: 1rem;
-    }
-
+/* Game Controls */
+#stripe {
+    background: var(--color-bg-secondary);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-table {
-    margin: 20px auto;
-    width: 50%;
+.control-group {
+    display: flex;
+    gap: var(--spacing-sm);
 }
 
-@media screen and (max-width: 1000px) {
-    table {
-        width: 75%;
-    }
+.btn {
+    border: 1px solid var(--color-accent);
+    border-radius: calc(var(--radius-sm) + 2px);
+    background-color: #fff;
+    color: var(--color-accent);
+    padding: calc(var(--spacing-sm) - 2px) var(--spacing-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast);
+    min-width: 92px;
+    text-transform: uppercase;
+    position: relative;
 }
 
-@media screen and (max-width: 600px) {
-    table {
-        width: 95%;
-    }
+.btn:hover {
+    transform: translateY(-1px);
+    background: var(--color-button-hover);
+    box-shadow: 0 4px 8px rgba(11, 19, 32, 0.12);
+    color: #fff;
 }
 
+.btn:active {
+    transform: translateY(1px);
+    background: var(--color-button-hover);
+    box-shadow: 0 1px 2px rgba(11, 19, 32, 0.15);
+}
+
+.btn.active {
+    background: var(--color-button-hover);
+    color: #fff;
+    box-shadow: inset 0 2px 4px rgba(11, 19, 32, 0.15);
+    transform: none;
+    pointer-events: none;
+}
+
+#reset {
+    min-width: 120px;
+}
+
+/* Game Grid */
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background-color: var(--color-bg-primary);
+    min-height: 0;
+    /* allow flex child to shrink and avoid overflow */
+    overflow: hidden;
+    /* ensure no internal vertical scroll */
+}
+
+.grid {
+    /* semantic CSS Grid for the color area */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* rows size to content; min height provided by grid-auto-rows */
+    grid-auto-rows: minmax(150px, 1fr);
+    gap: var(--spacing-md);
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    /* let grid size to content so we can center it */
+    margin: 0 auto;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+/* hide legacy table cells (we replaced markup with .grid) */
+tr,
 td {
-    padding: 10px;
-    width: 33.3%;
+    display: none;
 }
 
 .square {
-    height: 75px;
-    margin: 0 auto;
-    background-color: #232323;
-    padding-bottom: 30%;
-    border-radius: 8px;
-    -moz-transition: background-color 400ms;
-    -webkit-transition: background-color 400ms;
-    transition: background-color 400ms;
+    width: 100%;
+    height: 100%;
+    /* fill the grid cell */
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     cursor: pointer;
-
-}
-
-#stripe {
-    background: #ffffff;
-    border: none;
-    text-align: center;
+    box-shadow: 0 2px 6px rgba(11, 19, 32, 0.05);
+    border: 1px solid rgba(11, 19, 32, 0.04);
+    position: relative;
+    overflow: hidden;
     display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.square.restrictedSquare {
+    display: none;
+}
+
+.square:hover {
+    transform: translateY(-2px);
+    /* subtler hover shadow */
+    box-shadow: 0 8px 18px rgba(11, 19, 32, 0.06);
+}
+
+.square:active {
+    transform: translateY(0);
+}
+
+/* Health Display */
+.heathDisplay {
+    position: fixed;
+    bottom: var(--spacing-md);
+    left: var(--spacing-md);
+    z-index: 100;
+}
+
+.heathDisplay ul {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.heathDisplay p {
+    padding: 5px 0;
+}
+
+.healthIndicator {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-error);
+    border-radius: var(--radius-full);
+    list-style: none;
+    transition: all var(--transition-normal);
+    box-shadow: 0 0 6px rgba(155, 79, 79, 0.18);
+}
+
+/* Score Display */
+.scoreDisplay {
+    position: fixed;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    background-color: var(--color-accent);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
     justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    /* more subtle shadow for premium feel */
+    box-shadow: 0 2px 6px rgba(15, 23, 36, 0.06);
+    z-index: 100;
 }
 
-#stripe button,
-#stripe span {
-
-    padding: 0.5rem;
+/* Game Stats Screen */
+.gameStatScreen {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
 }
 
-.active {
-    background: steelblue;
-    pointer-events: none;
-    color: white;
+.modal-content {
+    background: #fff;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    opacity: 0;
+    animation: modalAppear 0.3s ease forwards;
+}
+
+@keyframes modalAppear {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.gameStatScreen h2 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-accent);
+}
+
+.gameStatScreen p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    #stripe {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .control-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .grid {
+        width: 90%;
+    }
+
+    #colorDisplay {
+        font-size: 2.5rem;
+    }
+
+    .heathDisplay {
+        left: var(--spacing-md);
+        bottom: var(--spacing-md);
+    }
+
+    .scoreDisplay {
+        right: var(--spacing-md);
+        bottom: var(--spacing-md);
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Handle very short viewports: reduce padding and font sizes so content fits without scrolling */
+@media (max-height: 720px) {
+    .game-container {
+        padding: var(--spacing-sm) var(--spacing-sm);
+    }
+
+    .grid {
+        max-width: 100%;
+        gap: 0.5rem;
+        grid-auto-rows: minmax(80px, 1fr);
+    }
+
+    #colorDisplay {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-height: 620px) {
+    h1 {
+        font-size: 1rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    #colorDisplay {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.25rem 0.5rem;
+        min-width: 60px;
+    }
+
+    .game-container {
+        padding: var(--spacing-xs) var(--spacing-xs);
+    }
+
+    .grid {
+        grid-auto-rows: minmax(60px, 1fr);
+        gap: 0.5rem;
+    }
+}
+
+/* Larger screens: bigger color boxes & more geometric spacing */
+@media screen and (min-width: 1200px) {
+    .grid {
+        max-width: 900px;
+        gap: 1.5rem;
+    }
+
+    #colorDisplay {
+        font-size: 3.25rem;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .grid {
+        max-width: 1100px;
+        gap: 2rem;
+    }
+
+    #colorDisplay {
+        font-size: 3.75rem;
+    }
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Utility Classes */
+.noDisplay {
+    display: none;
 }
 
 .restrictedSquare {
     display: none;
 }
 
-button {
-    border: none;
-    background: none;
-    text-transform: uppercase;
-    height: 100%;
-    font-weight: 700;
-    color: steelblue;
-    letter-spacing: 1px;
-    font-size: inherit;
-    padding: 2px;
-    margin: 0 7px;
-    -moz-transition: all 250ms;
-    -webkit-transition: all 250ms;
-    transition: all 250ms;
-    outline: none;
-    border-radius: 2px;
-    width: 75px;
-}
-
-button:hover {
-    cursor: pointer;
-    color: white;
-    background: steelblue;
-}
-
-#reset {
-    width: 150px;
-    margin-right: 50px;
-}
-
-#reset:active {
-    color: white;
-    background: steelblue;
-}
-
-@media screen and (max-width: 1000px) {
-    #stripe {
-        font-size: 0.9rem;
-    }
-}
-
-@media screen and (max-width: 720px) {
-    #stripe {
-        flex-direction: column;
-        align-items: center;
-    }
-
-
-    #reset {
-        margin-right: 0;
-    }
-
-    #reset:hover {
-        background-color: transparent;
-        color: #4682b4;
-    }
-
-    #reset:active {
-        color: white;
-        background: steelblue;
-    }
-
-    .active {
-        background: rgb(255, 255, 255) !important;
-        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(70, 130, 180, 1) 10%, rgba(70, 130, 180, 1) 50%, rgba(70, 130, 180, 1) 90%, rgba(255, 255, 255, 1) 100%) !important;
-    }
-
-    #resultDisplay {
-        width: 100%;
-    }
-}
-
-
-.scoreDisplay {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 1rem;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.heathDisplay {
-    position: absolute;
-    background-color: transparent;
-    bottom: 5%;
-    left: 5%;
-}
-
-@media screen and (min-width: 2500px) {
-    .heathDisplay {
-        top: 5vh;
-    }
-}
-
-.heathDisplay ul {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-}
-
-.healthIndicator {
-    background-color: red;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    list-style: none;
-}
-
-.gameStatScreen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 90vw;
-    height: 90vh;
-    margin: auto;
-    background-color: rgba(196, 196, 196, 0.8);
-    border-radius: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-size: 2rem;
-}
-
-.gameStatScreen p {
-    font-size: 1rem;
-}
-
-.noDisplay {
-    display: none;
-}
+/* end of stylesheet - utility classes kept minimal to avoid conflicting legacy rules */
